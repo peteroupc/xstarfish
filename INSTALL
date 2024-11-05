@@ -1,6 +1,8 @@
 (1)  Read the README file if you want to find out how it works.
 
-(2)  Type "make" to build the program.
+(2)  Type "make" to build the program.  (The libpng and libX11
+     development packages are needed to build this program 
+     successfully.)
 
 (3)  If the program built successfully, type "make install" to
      copy the binary into /usr/local/bin/. This must be done as

@@ -152,7 +152,7 @@ GenListRef LoadGenerators(void)
 	//Create a genlist big enough to hold that many generators.
 	out = malloc(sizeof(struct GeneratorList));
 	genlistsize = gencount * sizeof(GeneratorRec);
-	if(out) out->gen = (GenListRef)malloc(genlistsize);
+	if(out) out->gen = (GeneratorRec*)malloc(genlistsize);
 	if(out && out->gen)
 		{
 		//Poke in the generator count so we can get at it later.

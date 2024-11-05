@@ -153,17 +153,17 @@ srl_result CopyGreyIntoGradient(greybuf src, pixbuf dest, const pixel* low, cons
 						tempval = srcline[hctr];
 						//Calculate the red channel of the pixel.
 						interval = tempval;
-						interval /= CHANNEL_RANGE;
+						interval /= MAX_CHANVAL;
 						interval *= high->red - low->red;
 						temppixel->red = interval + low->red;
 						//Next calculate the green channel.
 						interval = tempval;
-						interval /= CHANNEL_RANGE;
+						interval /= MAX_CHANVAL;
 						interval *= high->green - low->green;
 						temppixel->green = interval + low->green;
 						//Calculate the blue channel in the same fashion
 						interval = tempval;
-						interval /= CHANNEL_RANGE;
+						interval /= MAX_CHANVAL;
 						interval *= high->blue - low->blue;
 						temppixel->blue = interval + low->blue;
 						//We ignore the alpha channel.
@@ -237,22 +237,22 @@ srl_result MergePixBufs(pixbuf top, pixbuf bottom, pixbuf dest)
 						destpixel->red =
 								(
 								(toppixel->red * toppixel->alpha) + 
-								(botpixel->red * (CHANNEL_RANGE - toppixel->alpha))
-								) / (CHANNEL_RANGE);
+								(botpixel->red * (MAX_CHANVAL - toppixel->alpha))
+								) / (MAX_CHANVAL);
 						//Next calculate the green channel.
 						destpixel->green =
 								(
 								(toppixel->green * toppixel->alpha) + 
-								(botpixel->green * (CHANNEL_RANGE - toppixel->alpha))
-								) / (CHANNEL_RANGE);
+								(botpixel->green * (MAX_CHANVAL - toppixel->alpha))
+								) / (MAX_CHANVAL);
 						//Calculate the blue channel in the same fashion
 						destpixel->blue =
 								(
 								(toppixel->blue * toppixel->alpha) + 
-								(botpixel->blue * (CHANNEL_RANGE - toppixel->alpha))
-								) / (CHANNEL_RANGE);
+								(botpixel->blue * (MAX_CHANVAL - toppixel->alpha))
+								) / (MAX_CHANVAL);
 						//The alpha channel is the sum of these alpha channels. 255 is max opaque.
-						if(toppixel->alpha + botpixel->alpha > CHANNEL_RANGE) destpixel->alpha = CHANNEL_RANGE;
+						if(toppixel->alpha + botpixel->alpha > MAX_CHANVAL) destpixel->alpha = MAX_CHANVAL;
 							else destpixel->alpha = toppixel->alpha + botpixel->alpha;
 						}
 					}
@@ -363,4 +363,4 @@ srl_result InvertGreyBuf(greybuf it)
 	else err = srl_bogusBuffer;
 	return err;
 	}
-
+
